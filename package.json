@@ -1,0 +1,13 @@
+{
+  "name": "weather-cli",
+  "version": "1.0.0",
+  "description": "CLI weather app",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "cli",
+    "weather"
+  ],
+  "author": "Arthur Khineltsev",
+  "license": "ISC"
+}
