@@ -2,7 +2,7 @@ import axios from "axios"
 import { getKeyValue, STORAGE_DICT } from "./storage.service.js"
 
 export const getWeather = async (city) => {
-    const token = await getKeyValue(STORAGE_DICT.token)
+    const token = process.env.TOKEN ?? await getKeyValue(STORAGE_DICT.token)
     if (!token) {
         throw new Error("API key is not defined. Set it via -t option")
     }
