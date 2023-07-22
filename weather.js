@@ -17,18 +17,51 @@ const saveToken = async (token) => {
     }
 }
 
+const saveCity = async (city) => {
+    if (!city.length) {
+        printError("City is not provided")
+        return
+    }
+    try {
+        await saveKeyValue(STORAGE_DICT.city, city)
+        printSuccess("City has been saved")
+    } catch (e) {
+        printError(e.message)
+    }
+};
+
+const getForecast = async () => {
+    try {
+        const weather = await getWeather(process.env.CITY);
+        console.log(weather);
+    } catch (e) {
+        if (e?.response?.status === 404) {
+            printError("Wrong city provided")
+            return
+        }
+        if (e?.response?.status === 401) {
+            printError("Wrong token provided")
+            return
+        }
+        printError(e.message)
+    }
+}
+
 const initCLI = () => {
     const args = getArgs(process.argv)
     if (args.h) {
         printHelp()
+        return
     }
     if (args.s) {
-        // save city
+        saveCity(args.s)
+        return
     }
     if (args.t) {
-        return saveToken(args.t)
+        saveToken(args.t)
+        return
     }
-    getWeather("moscow")
+    getForecast()
 }
 
 initCLI()
