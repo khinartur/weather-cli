@@ -1,7 +1,11 @@
 {
-  "name": "weather-cli",
+  "name": "weather-cli-khinartur",
   "version": "1.0.0",
   "description": "CLI weather app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khinartur/weather-cli"
+  },
   "main": "weather.js",
   "bin": {
     "weather": "weather.js"
