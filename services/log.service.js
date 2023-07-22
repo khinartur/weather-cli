@@ -18,3 +18,13 @@ export const printHelp = () => {
         -t [API_KEY] for API key setup
     `);
 }
+
+export const printWeather = (weatherResponse, icon) => {
+    console.log(dedent`
+        ${chalk.bgYellow(" WEATHER ")} in ${weatherResponse.name}
+        ${icon} ${weatherResponse.weather[0].description}
+        Temperature: ${weatherResponse.main.temp} (Feels like: ${weatherResponse.main.feels_like})
+        Humidity: ${weatherResponse.main.humidity}
+        Wind speed: ${weatherResponse.wind.speed}
+    `);
+}

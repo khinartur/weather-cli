@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { getArgs } from './helpers/args.js'
-import { getWeather } from './services/api.service.js'
-import { printError, printHelp, printSuccess } from './services/log.service.js'
+import { getIcon, getWeather } from './services/api.service.js'
+import { printError, printHelp, printSuccess, printWeather } from './services/log.service.js'
 import { getKeyValue, saveKeyValue, STORAGE_DICT } from './services/storage.service.js'
 
 const saveToken = async (token) => {
@@ -35,7 +35,7 @@ const getForecast = async () => {
         const city =
             process.env.CITY ?? (await getKeyValue(STORAGE_DICT.city))
         const weather = await getWeather(city)
-        console.log(weather);
+        printWeather(weather, getIcon(weather.weather[0].icon))
     } catch (e) {
         if (e?.response?.status === 404) {
             printError("Wrong city provided")
