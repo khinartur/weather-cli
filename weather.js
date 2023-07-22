@@ -2,7 +2,7 @@
 import { getArgs } from './helpers/args.js'
 import { getWeather } from './services/api.service.js'
 import { printError, printHelp, printSuccess } from './services/log.service.js'
-import { saveKeyValue, STORAGE_DICT } from './services/storage.service.js'
+import { getKeyValue, saveKeyValue, STORAGE_DICT } from './services/storage.service.js'
 
 const saveToken = async (token) => {
     if (!token.length) {
@@ -32,7 +32,9 @@ const saveCity = async (city) => {
 
 const getForecast = async () => {
     try {
-        const weather = await getWeather(process.env.CITY);
+        const city =
+            process.env.CITY ?? (await getKeyValue(STORAGE_DICT.city))
+        const weather = await getWeather(city)
         console.log(weather);
     } catch (e) {
         if (e?.response?.status === 404) {
